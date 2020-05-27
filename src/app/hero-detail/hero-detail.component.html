@@ -1,0 +1,37 @@
+<div *ngIf="hero">
+  <h2>{{hero.name | uppercase}} Details</h2>
+  <div><span>id: </span>{{hero.id}}</div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="hero.name" placeholder="name"/>
+    </label>
+  </div>
+  <div *ngIf="powers.length !== 0">
+    <label>powers:
+      <input 
+        #powerEdit
+        *ngFor="let power of powers"
+        (change)="changePower(powerEdit.value, powerEdit.id)" 
+        value={{power.name}}
+        id={{power.id}} />
+    </label>
+  </div>
+  <div>
+    <label>add power:
+      <input #powerName />
+    </label>
+  </div>
+
+  <button (click)="addPower(hero.id, powerName.value); getPowers(hero.id); powerName.value=''">
+      add power
+    </button>
+  <button (click)="goBack()">go back</button>
+  <button (click)="save()">save</button>
+</div>
+
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->

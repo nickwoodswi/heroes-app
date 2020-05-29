@@ -6,15 +6,28 @@
       <input [(ngModel)]="hero.name" placeholder="name"/>
     </label>
   </div>
+  <div *ngIf="hero.retirement_date">
+    <label>retirement date:</label><br>
+    <input [(ngModel)]="hero.retirement_date">
+  </div>
+  <div *ngIf="!hero.retirement_date">
+    <label>add retirement date:</label><br>
+    <input #retirementDate type="date"><br>
+    <button (click)="changeRetirement(hero.id, hero.name, retirementDate.value)">add</button>
+  </div>
   <div *ngIf="powers.length !== 0">
-    <label>powers:
+    <label>powers:</label>
+    <div>
+      <ng-container *ngFor="let power of powers">
       <input 
         #powerEdit
-        *ngFor="let power of powers"
         (change)="changePower(powerEdit.value, powerEdit.id)" 
         value={{power.name}}
         id={{power.id}} />
-    </label>
+        <button id={{power.id}} class="delete" title="delete power"
+        (click)="deletePower(hero.id, powerEdit.id)">DELETE POWER</button><br>
+      </ng-container>
+    </div>
   </div>
   <div>
     <label>add power:

@@ -7,14 +7,13 @@
   <!-- (click) passes input value to add() and then clears the input -->
 </div>
 <div>
-  <label>Power:
+  <label>Powers:</label>
     <input #powerName />
-  </label>
   <!-- (click) passes input value to add() and then clears the input -->
 </div>
 <div>
   <label>Retirement Date:
-    <input #retirementDate type="date" placeholder="Month as number"/>
+    <input #retirementDate type="date" />
   </label>
   <!-- (click) passes input value to add() and then clears the input -->
   <button (click)="add(heroName.value, powerName.value, retirementDate.value); heroName.value=''; powerName.value=''">
@@ -27,8 +26,8 @@
   <li *ngFor="let hero of heroes">
 
       <a routerLink="/detail/{{hero.id}}">
-        <span *ngIf="hero.retirement == 'active' || !hero.retirement" class="badge">{{hero.id}}</span>
-        <span *ngIf="hero.retirement == 'retired'" class="badge-red">{{hero.id}}</span>
+        <span *ngIf="hero.status == 'active' || !hero.status" class="badge">{{hero.id}}</span>
+        <span *ngIf="hero.status == 'retired'" class="badge-red">{{hero.id}}</span>
         {{hero.name}}
       </a>
 

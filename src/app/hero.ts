@@ -1,7 +1,9 @@
 export interface Hero {
   id: number;
   name: string;
-  retirement: Date;
+  retirement_date: Date;
+  status: string;
+  powers: []
 }
 
 

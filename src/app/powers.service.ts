@@ -7,7 +7,7 @@ export class PowersService {
 
   powers = []
 
-  addPower(heroId, power) {
+  addPowers(heroId, power) {
 
     let powerObj = {
       id: this.powers.length + 1,
@@ -15,6 +15,17 @@ export class PowersService {
       name: power
     }
     this.powers.push(powerObj)
+  }
+
+  deletePower(id) {
+    console.log(`delete power called with id ${id}`)
+    let updatedPowers = []
+    this.powers.map(power => {
+      if (power.id != id) {
+        updatedPowers.push(power)
+      }
+    })
+    this.powers = updatedPowers
   }
 
   getPowers(heroId) {

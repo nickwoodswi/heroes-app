@@ -8,7 +8,13 @@
 </div>
 <div>
   <label>Powers:</label>
-    <input #powerName />
+    <input #powerName /><button (click)="addAddlPower(powerName.value); powerName.value=''">add power to hero</button>
+    <ng-container *ngIf="powers">
+    <br>ADDING THESE POWERS TO HERO:
+      <ul>
+        <li *ngFor="let power of powers">{{power}}<button (click)="removePower(this.power)">REMOVE</button></li>
+      </ul>
+    </ng-container>
   <!-- (click) passes input value to add() and then clears the input -->
 </div>
 <div>

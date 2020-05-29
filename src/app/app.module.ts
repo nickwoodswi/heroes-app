@@ -36,7 +36,7 @@ import { PowersService } from './powers.service';
     HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
-    HeroSearchComponent
+    HeroSearchComponent,
   ],
   bootstrap: [ AppComponent ],
   providers: [PowersService]

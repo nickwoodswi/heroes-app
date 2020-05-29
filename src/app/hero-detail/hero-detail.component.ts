@@ -47,7 +47,9 @@ export class HeroDetailComponent implements OnInit {
   addPower(heroId, power): void {
     power = power.trim();
     if (!power) { return; }
-    this.powersService.addPowers(heroId, power)
+    let powers = []
+    powers.push(power)
+    this.powersService.addPowers(heroId, powers)
   }
 
   deletePower(heroId, id): void {

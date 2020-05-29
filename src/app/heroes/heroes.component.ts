@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
@@ -12,19 +12,36 @@ import { RetirementService } from '../retirement.service'
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
+  @Input() powers: string[];
+  newPowers = []
 
   constructor(
     private heroService: HeroService,
     private powersService: PowersService,
-    private retirementService: RetirementService
+    private retirementService: RetirementService,
     ) { }
 
   ngOnInit() {
     this.getHeroes();
   }
 
-  addAddlPower() {
-    console.log('addAddlPower called')
+  addAddlPower(newPower) {
+    console.log(newPower)
+    this.newPowers.push(newPower)
+    this.powers = this.newPowers
+    console.log(this.newPowers, this.powers)
+  }
+
+  removePower(power) {
+    console.log(power)
+    let updatedPowers = []
+    this.newPowers.map(newPower => {
+      if (newPower != power) {
+        updatedPowers.push(newPower)
+      }
+    })
+    this.newPowers = updatedPowers
+    this.powers = this.newPowers
   }
 
   getHeroes(): void {
@@ -37,7 +54,7 @@ export class HeroesComponent implements OnInit {
     name = name.trim();
     power = power.trim();
     if(!name) {return}
-    if (!power) {return}
+    if (!power && !this.newPowers) {return}
 
     const dateObj = new Date(retirement_date)
     const today = new Date()
@@ -51,7 +68,7 @@ export class HeroesComponent implements OnInit {
       .subscribe(hero => {
         console.log(hero)
         this.heroes.push(hero);
-        this.powersService.addPowers(hero.id, power);
+        this.powersService.addPowers(hero.id, this.newPowers);
         this.retirementService.addRetirement(hero.id, retirement_date)
       });
   }

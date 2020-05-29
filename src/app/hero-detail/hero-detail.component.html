@@ -12,8 +12,7 @@
   </div>
   <div *ngIf="!hero.retirement_date">
     <label>add retirement date:</label><br>
-    <input #retirementDate type="date"><br>
-    <button (click)="changeRetirement(hero.id, hero.name, retirementDate.value)">add</button>
+    <input type="date" [(ngModel)]="hero.retirement_date">
   </div>
   <div *ngIf="powers.length !== 0">
     <label>powers:</label>
